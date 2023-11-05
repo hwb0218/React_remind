@@ -1,0 +1,17 @@
+.container {
+  width: 500px;
+  height: 500px;
+  background-color: aquamarine;
+}
+
+.pointer {
+  --width: 30px;
+  --height: 30px;
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+  left: calc(-1 * (var(--width) / 2));
+  top: calc(-1 * (var(--height) / 2));
+  border-radius: 50%;
+  background-color: tomato;
+}
