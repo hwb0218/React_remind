@@ -1,4 +1,4 @@
-const initialState = {
+export const initPersonState = {
   name: '영차',
   title: '주니어개발자',
   mentors: [
@@ -13,7 +13,7 @@ const initialState = {
   ],
 };
 
-type State = typeof initialState;
+type State = typeof initPersonState;
 
 // 이넘은 특정값들의 집합을 의마하는 자료형이다.
 // 아래는 문자형 이넘
@@ -23,22 +23,13 @@ export enum ACTION_TYPE {
   DELETED = 'deleted',
 }
 
-// | { type: 'updated', payload: { prev: string, current: string } }
-// | { type: 'added', payload: { name: string, title: string }}
-// | { type: 'deleted', payload: { name: string }};
+type PersonAction =
+  | { type: ACTION_TYPE.UPDATED, payload: { prev: string, current: string } }
+  | { type: ACTION_TYPE.ADDED, payload: { name: string, title: string }}
+  | { type: ACTION_TYPE.DELETED, payload: { name: string }}
 
-type PersonAction = {
-  type: ACTION_TYPE,
-  payload: {
-    prev?: string;
-    current?: string;
-    name?: string;
-    title?: string;
-  }
-}
-
-export function reducer(
-  state: State = initialState,
+export default function personReducer(
+  state: State = initPersonState,
   { type, payload }: PersonAction,
 ): State {
   switch (type) {
@@ -47,7 +38,7 @@ export function reducer(
       ...state,
       mentors: state.mentors.map((mentor) => {
         if (mentor.name === payload.prev) {
-          return { ...mentor, name: payload.current ?? '' };
+          return { ...mentor, name: payload?.current ?? '' };
         }
         return mentor;
       }),
@@ -57,15 +48,15 @@ export function reducer(
     return {
       ...state,
       mentors: [...state.mentors, {
-        name: payload.name ?? '',
-        title: payload.title ?? '',
+        name: payload?.name ?? '',
+        title: payload?.title ?? '',
       }],
     };
   }
   case ACTION_TYPE.DELETED: {
     return {
       ...state,
-      mentors: state.mentors.filter((mentor) => mentor.name !== payload.name),
+      mentors: state.mentors.filter((mentor) => mentor.name !== payload?.name),
     };
   }
   default:
