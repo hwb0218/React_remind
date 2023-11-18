@@ -1,3 +1,4 @@
+import useDarkMode from '../../hooks/useDarkMode';
 import ToDoCategory from './ToDoCategory';
 
 const cagetories = ['all', 'active', 'completed'] as const;
@@ -11,9 +12,11 @@ type ToDoCategoriesProps = {
 export default function ToDoCategories({
   onClickCategory,
 }: ToDoCategoriesProps) {
+  const { toggle } = useDarkMode();
+
   return (
     <div>
-      <button type="button">Light</button>
+      <button type="button" onClick={toggle}>Light</button>
       <ul>
         {cagetories.map((category: Categories) => {
           const id = `${new Date().getTime()}-${category}`;
