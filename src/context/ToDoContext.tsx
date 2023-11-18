@@ -19,6 +19,10 @@ export const TodoContext = createContext<useTodoContextType>(initTodoContextStat
 
 export default function TodoProvider({ children }: TodoProviderProps) {
   return (
-    <TodoContext.Provider value={useTodoContext(initTodoState)}>{children}</TodoContext.Provider>
+    <TodoContext.Provider
+      value={useTodoContext(initTodoState)}
+    >
+      {children}
+    </TodoContext.Provider>
   );
 }

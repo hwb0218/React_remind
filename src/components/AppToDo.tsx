@@ -14,9 +14,11 @@ export default function AppToDo() {
 
   return (
     <TodoProvider>
-      <ToDoCategories onClickCategory={handleClickCategory} />
-      <ToDoList category={selectedCategory} />
-      <ToDoTextField />
+      <div className="mx-auto max-w-lg flex flex-col justify-center items-center border border-solid border-indigo-500 rounded-md">
+        <ToDoCategories onClickCategory={handleClickCategory} />
+        <ToDoList category={selectedCategory} />
+        <ToDoTextField />
+      </div>
     </TodoProvider>
   );
 }
