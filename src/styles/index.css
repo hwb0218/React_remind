@@ -7,7 +7,8 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-  
+    font-size: 62.5%;
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -16,6 +17,20 @@
   }
   body {
     margin: 0;
-    @apply flex justify-center items-center w-screen h-screen;
+    @apply flex justify-center items-center w-screen h-screen dark:bg-bgDark;
+    background: rgb(252,213,119);
+    background: linear-gradient(90deg, rgba(252,213,119,1) 0%, rgba(235,143,14,1) 80%);
+    font-size: 1.6rem;
   }
+
+  #root {
+    @apply w-full;
+    font-size: 1.8rem;
+  }
+}
+
+.container {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import {
+  useState, useCallback, useLayoutEffect,
+} from 'react';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../utils/webStorage';
 
 export default function useDarkMode() {
@@ -7,7 +9,7 @@ export default function useDarkMode() {
     return storedTheme ?? false;
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (localStorage.theme === 'true') {
       document.documentElement.classList.add('dark');
     } else {
@@ -15,7 +17,7 @@ export default function useDarkMode() {
     }
   }, [isDarkMode]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     if (isDarkMode) {
       removeLocalStorage({ key: 'theme' });
       setDarkMode(false);
@@ -23,7 +25,7 @@ export default function useDarkMode() {
       setLocalStorage<boolean>({ key: 'theme', value: true });
       setDarkMode(true);
     }
-  };
+  }, [isDarkMode]);
 
   return {
     toggle: toggleTheme,

@@ -14,17 +14,23 @@ export default function ToDoItem({
   onDeleteTodo,
 }: ToDoItemProps) {
   return (
-    <li>
+    <li className="flex my-4 mx-2 text-dimBg dark:text-white font-bold">
       <div>
         <input
+          id={index.toString()}
           type="checkbox"
           checked={todo.category === 'completed'}
-          onClick={(e) => onUpdateTodo(index, e.currentTarget.checked)}
+          onChange={(e) => onUpdateTodo(index, e.currentTarget.checked)}
         />
-        <span>{todo.text}</span>
+        <label htmlFor={index.toString()} className="ml-1 select-none">{todo.text}</label>
       </div>
-      <div>
-        <button type="button" onClick={() => onDeleteTodo(todo.id)}>휴지통</button>
+      <div className="ml-auto">
+        <button
+          type="button"
+          onClick={() => onDeleteTodo(todo.id)}
+        >
+          휴지통
+        </button>
       </div>
     </li>
   );

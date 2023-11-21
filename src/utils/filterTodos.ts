@@ -1,4 +1,4 @@
-import { Categories } from '../components/ToDo/ToDoCategories';
+import { Categories } from '../components/todo/ToDoCategories';
 import { ToDo } from '../reducers/todo.reducer';
 
 const filterTodos = (todos: ToDo[], currentCategory: Categories) => {

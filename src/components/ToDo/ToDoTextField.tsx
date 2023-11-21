@@ -5,8 +5,9 @@ import useTodo from '../../hooks/useTodo';
 import TextField from '../common/TextField';
 
 export default function ToDoTextField() {
-  const { addTodo } = useTodo();
   const [text, setText] = useState('');
+
+  const { addTodo } = useTodo();
 
   const handleChangeText = (value: string) => {
     setText(value);
@@ -14,18 +15,25 @@ export default function ToDoTextField() {
 
   const handleEnterInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (text.length && e.key === 'Enter') {
-      addTodo(text.trim());
+      const trimText = text.trim();
+
+      addTodo(trimText);
       setText('');
     }
   };
 
+  const handleClickAddBtn = (todo: string) => {
+    addTodo(todo);
+    setText('');
+  };
+
   return (
-    <div>
+    <div className="flex justify-between p-3 w-full bg-bgDark dark:bg-dimBg">
       <TextField
         placeholder="Add Todo"
         value={text}
         onChangeText={handleChangeText}
-        onClickAddTodo={addTodo}
+        onClickAddBtn={handleClickAddBtn}
         onEnterInput={handleEnterInput}
       />
     </div>

@@ -16,18 +16,16 @@ export default function ToDoList({ category }: ToDoListProps) {
   const filteredTodos = filterTodos(todos, category);
 
   return (
-    <div>
-      <ul>
-        {filteredTodos.map((todo, index) => (
-          <ToDoItem
-            key={todo.id}
-            todo={todo}
-            index={index}
-            onUpdateTodo={updateTodo}
-            onDeleteTodo={deleteTodo}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className="flex-auto w-full p-3 dark:bg-dimBg overflow-y-auto">
+      {filteredTodos.map((todo, index) => (
+        <ToDoItem
+          key={todo.id}
+          todo={todo}
+          index={index}
+          onUpdateTodo={updateTodo}
+          onDeleteTodo={deleteTodo}
+        />
+      ))}
+    </ul>
   );
 }

@@ -1,3 +1,5 @@
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../utils/webStorage';
+
 export type ToDo = {
   id: string;
   text: string;
@@ -20,7 +22,7 @@ type ReducerAction =
 | { type: TODO_ACTION_TYPE.DELETED, payload: { id: string } }
 
 export const initTodoState: InitTodoState = {
-  todos: [],
+  todos: getLocalStorage({ key: 'todos' }) ?? [],
 };
 
 const toDoReducer = (
@@ -35,6 +37,8 @@ const toDoReducer = (
       text: payload,
       category: 'active',
     };
+
+    setLocalStorage({ key: 'todos', value: [...state.todos, newTodo] });
 
     return {
       todos: [...state.todos, newTodo],
@@ -51,6 +55,13 @@ const toDoReducer = (
   }
   case TODO_ACTION_TYPE.DELETED: {
     const newTodos = state.todos.filter((item) => item.id !== payload.id);
+
+    if (newTodos.length) {
+      setLocalStorage({ key: 'todos', value: newTodos });
+    } else {
+      removeLocalStorage({ key: 'todos' });
+    }
+
     return { todos: newTodos };
   }
   default:
